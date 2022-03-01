@@ -21,7 +21,7 @@ export function NavBar(props) {
                         <MDBBtn color='warning' className='m-1' onClick={props.onLogout} size='sm' floating>
                             <img src={logoutImg} style={{ width: '20px' }} alt="" />
                         </MDBBtn>
-                        <MDBBtn color='warning' className='m-1' onClick={e => {props.showCart(e)}} size='sm' floating>
+                        <MDBBtn color='warning' className='m-1' size='sm' floating>
                             <img src={shoppingCart} style={{ width: '20px', opacity: '50%' }} alt="" />
                         </MDBBtn>
                     </div>

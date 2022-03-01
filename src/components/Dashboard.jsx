@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 import { Carousel } from './Carousel'
@@ -6,14 +6,18 @@ import { NavBar } from './NavBar'
 import { db } from '../firebase'
 import { collection, getDocs } from "firebase/firestore";
 import { AllProductsCategory } from './AllProductsCategory'
+import { useSelector, useDispatch } from 'react-redux'
+import { setProducts } from '../redux/action-creator/ActionCreators'
 
 export const Dashboard = () => {
 
     const { signout } = useAuth()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const products = useSelector(state => state.allProducts.products)
+    console.log(products)
 
     function handleSubmit() {
-        console.log("mfer please work")
         try {
             signout()
             navigate('/login')
@@ -21,24 +25,12 @@ export const Dashboard = () => {
         }
     }
 
-    function onAddCart(e){
-        
-        
-    }
-
-    const [products, setProducts] = useState([])
-    const [cartProduct, setCartProduct] = useState([])
     const productsCollectionRef = collection(db, 'products')
-
-    let showCart = (e) => {
-        navigate('/cart')
-
-    }
 
     useEffect(() => {
         const getProducts = async () => {
             const data = await getDocs(productsCollectionRef)
-            setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+            dispatch(setProducts(data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))))
         }
         getProducts()
     }, [])
@@ -46,9 +38,9 @@ export const Dashboard = () => {
     return (
         <>
             <div className="bg bg-light">
-                <NavBar onLogout={handleSubmit} showCart={showCart}></NavBar>
+                <NavBar onLogout={handleSubmit}></NavBar>
                 <Carousel></Carousel>
-                { products.length!==0 && <AllProductsCategory products={products} onAddCart={onAddCart}/>}
+                <AllProductsCategory />
             </div>
         </>
     )
