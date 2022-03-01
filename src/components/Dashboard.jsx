@@ -15,7 +15,6 @@ export const Dashboard = () => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const products = useSelector(state => state.allProducts.products)
-    console.log(products)
 
     function handleSubmit() {
         try {
