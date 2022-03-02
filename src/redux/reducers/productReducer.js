@@ -36,7 +36,7 @@ export const productReducer = (state = initState, { type, payload }) => {
                 ...state,
                 cart: state.cart.map((item) =>
                     item.id === payload.id
-                        ? { ...item, qty: + payload.qty }
+                        ? { ...item, qty: payload.qty }
                         : item
                 ),
             };

@@ -5,6 +5,7 @@ import { LogIn } from "./components/LogIn";
 import { Dashboard } from "./components/Dashboard";
 import { PrivateRoute } from "./routes/PrivateRoute";
 import { Cart } from "./components/Cart";
+import { Payment } from "./components/Payment";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
             <Route path='/signup' element={<SignUp />} />
             <Route path='/login' element={<LogIn />} />
             <Route path='/cart' element={<Cart />} />
+            <Route path='/payment' element={<Payment />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>
