@@ -2,10 +2,12 @@ import { Navbar } from 'react-bootstrap';
 import logoutImg from '../images/log-out.png'
 import storeLogo from '../images/store.png'
 import shoppingCart from '../images/shopping-cart.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { MDBBtn } from 'mdb-react-ui-kit';
 
 export function NavBar(props) {
+
+    const navigate = useNavigate()
 
     return (
         <>
@@ -21,7 +23,7 @@ export function NavBar(props) {
                         <MDBBtn color='warning' className='m-1' onClick={props.onLogout} size='sm' floating>
                             <img src={logoutImg} style={{ width: '20px' }} alt="" />
                         </MDBBtn>
-                        <MDBBtn color='warning' className='m-1' size='sm' floating>
+                        <MDBBtn color='warning' disabled={props.isCart} onClick={() => navigate('/cart')} className='m-1' size='sm' floating>
                             <img src={shoppingCart} style={{ width: '20px', opacity: '50%' }} alt="" />
                         </MDBBtn>
                     </div>

@@ -2,12 +2,9 @@ import React from 'react'
 import { Sports } from './Sports'
 import { Toys } from './Toys'
 import { Clothing } from './Clothing'
-import { useSelector } from 'react-redux'
 
 
 export const AllProductsCategory = () => {
-
-    const products = useSelector(state => state.allProducts.products)
 
     return (
         <>
@@ -28,7 +25,7 @@ export const AllProductsCategory = () => {
             </div>
 
             <div className="text-center my-3">
-                <h4></h4>
+                <h4>Clothing, Shoes & Jewelry</h4>
                 <div className='d-flex justify-content-center'>
                     <hr style={{ width: '100px' }} />
                 </div>

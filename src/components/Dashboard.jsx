@@ -6,8 +6,9 @@ import { NavBar } from './NavBar'
 import { db } from '../firebase'
 import { collection, getDocs } from "firebase/firestore";
 import { AllProductsCategory } from './AllProductsCategory'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import { setProducts } from '../redux/action-creator/ActionCreators'
+import { useSelector } from 'react-redux'
 
 export const Dashboard = () => {
 
@@ -39,7 +40,7 @@ export const Dashboard = () => {
             <div className="bg bg-light">
                 <NavBar onLogout={handleSubmit}></NavBar>
                 <Carousel></Carousel>
-                <AllProductsCategory />
+                {products.length > 1 && < AllProductsCategory />}
             </div>
         </>
     )

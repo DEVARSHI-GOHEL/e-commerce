@@ -9,11 +9,30 @@ export const setProducts = (products) => {
     )
 }
 
-export const selectedProduct = (product) => {
+export const addToCart = (product) => {
     return (
         {
-            type: ActionTypes.SELECTED_PRODUCT,
+            type: ActionTypes.ADD_TO_CART,
             payload: product
         }
     )
 }
+
+export const removeFromCart = (id) => {
+    return (
+        {
+            type: ActionTypes.REMOVE_FROM_CART,
+            payload: id
+        }
+    )
+}
+
+export const adjustItemQty = (id, qty) => {
+    return {
+        type: ActionTypes.ADJUST_ITEM_QTY,
+        payload: {
+            id: id,
+            qty
+        }
+    };
+};
