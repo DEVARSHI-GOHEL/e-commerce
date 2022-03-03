@@ -1,12 +1,12 @@
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBContainer, MDBInput, MDBBtn, MDBRow, MDBCol } from 'mdb-react-ui-kit'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { TotalPrice } from './TotalPrice'
 import { useSelector } from 'react-redux'
 import { OrderSummery } from './OrderSummery'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { db } from '../firebase'
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, doc, getDocs, updateDoc } from "firebase/firestore";
 import { useDispatch } from 'react-redux'
 import { NavBar } from './NavBar'
 import { emptyCart } from '../redux/action-creator/ActionCreators'
@@ -18,35 +18,50 @@ export const Payment = () => {
   const [name, setName] = useState()
   const [contact, setContact] = useState()
   const [address, setAddress] = useState()
+  const userCollectionRef = collection(db, 'Users')
   const email = currentUser.email
   const navigate = useNavigate()
-  const usersCollectionRef = collection(db, 'Users')
   const dispatch = useDispatch()
+  const [users, setUsers] = useState()
 
-  const createUser = async (user) => {
-    await addDoc(usersCollectionRef, user)
-  }
+  useEffect(() => {
+    const getData = async () => {
+      const data = await getDocs(userCollectionRef).then(
+        setUsers(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })))
+      )
+    }
+    getData()
+  }, [])
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-
-    let user = {
-      name: name,
-      address: address,
-      contant: contact,
-      email: email,
+  const updateUser = async (user) => {
+    const userDoc = doc(db, 'Users', user.id)
+    const newUserData = {
+      displayName: name,
+      contact: contact,
+      deliveryAaddress: address,
       orders: carts
     }
-    
-    createUser(user)
+    await updateDoc(userDoc, newUserData).then(clearData())
+  }
 
+  function clearData() {
     setAddress('')
     setName('')
     setContact('')
     dispatch(emptyCart())
     signout()
-
     navigate('/exit')
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    users.map(user => {
+      if (user.email === email) {
+        console.log(user)
+        updateUser(user)
+      }
+    })
   }
 
 
@@ -63,13 +78,12 @@ export const Payment = () => {
               <MDBCardBody>
                 <form onSubmit={handleSubmit}>
                   <div>
-
                     <MDBInput
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className='m-2' label='Full Name' type='text' style={{ width: '30vw' }} required />
 
-                    <MDBInput className='m-2' label='Email' placeholder={email} readonly type='email' style={{ width: '30vw' }} />
+                    <MDBInput className='m-2' label='Email' placeholder={email} type='email' style={{ width: '30vw' }} />
 
                     <MDBInput
                       value={contact}

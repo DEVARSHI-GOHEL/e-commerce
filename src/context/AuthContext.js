@@ -1,9 +1,10 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { auth } from '../firebase'
+import { auth, db } from '../firebase'
+import { addDoc, collection } from 'firebase/firestore'
 
 const AuthContext = React.createContext()
 
-export function useAuth(){
+export function useAuth() {
     return useContext(AuthContext)
 }
 
@@ -11,24 +12,28 @@ export const AuthProvider = ({ children }) => {
 
     const [currentUser, setCurrentUser] = useState()
     const [loading, setLoading] = useState(true)
+    const userCollectionRef = collection(db, 'Users')
 
-    function signup(email, password){
-        return auth.createUserWithEmailAndPassword(email, password)
+    function signup(email, password) {
+        return (auth.createUserWithEmailAndPassword(email, password)
+            .then(() => {
+                return addDoc(userCollectionRef, { email })
+            }))
     }
 
-    function login(email, password){
+    function login(email, password) {
         return auth.signInWithEmailAndPassword(email, password)
     }
 
-    function signout(){
+    function signout() {
         return auth.signOut()
     }
-    
-    function anonSignIn(){
+
+    function anonSignIn() {
         return auth.signInAnonymously()
     }
 
-    const value={
+    const value = {
         currentUser,
         signup,
         login,
@@ -44,9 +49,9 @@ export const AuthProvider = ({ children }) => {
         return unsubscribe
     }, [])
 
-  return (
-    <AuthContext.Provider value={value}>
-        { !loading && children }
-    </AuthContext.Provider>
-  )
+    return (
+        <AuthContext.Provider value={value}>
+            {!loading && children}
+        </AuthContext.Provider>
+    )
 }
