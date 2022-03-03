@@ -9,6 +9,14 @@ export const setProducts = (products) => {
     )
 }
 
+export const emptyCart = () => {
+    return(
+        {
+            type: ActionTypes.EMPTY_CART
+        }
+    )
+}
+
 export const addToCart = (product) => {
     return (
         {

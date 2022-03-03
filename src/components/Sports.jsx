@@ -19,7 +19,7 @@ export const Sports = () => {
 
     return (
         <>
-            {products.slice(50, 200).map(product => {
+            {products.map(product => {
                 if (product['Category'].includes('Sports & Outdoors')) {
                     return (
                         <li style={{ listStyleType: 'none' }}>

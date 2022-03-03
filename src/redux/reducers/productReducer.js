@@ -41,6 +41,12 @@ export const productReducer = (state = initState, { type, payload }) => {
                 ),
             };
 
+        case ActionTypes.EMPTY_CART:
+            return{
+                ...state,
+                cart: []
+            }    
+            
         default:
             return state
     }

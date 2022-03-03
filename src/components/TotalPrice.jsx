@@ -3,7 +3,7 @@ import { MDBBtn } from 'mdb-react-ui-kit';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
-export const TotalPrice = ({ isEmpty }) => {
+export const TotalPrice = ({ isEmpty, isPayment }) => {
 
     const carts = useSelector(state => state.allProducts.cart)
     const [totalQuantity, setTotalQuantity] = useState()
@@ -41,7 +41,7 @@ export const TotalPrice = ({ isEmpty }) => {
     return (
         <>
             <div className={dynamicClass()} >
-                <MDBBtn outline color='info' onClick={goToPayment}>
+                <MDBBtn outline color='info' disabled={isPayment} onClick={goToPayment}>
                     Total price: {totalPrice}
                 </MDBBtn>
             </div>

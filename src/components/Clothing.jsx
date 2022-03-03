@@ -17,7 +17,7 @@ export const Clothing = () => {
 
     return (
         <>
-            {products.slice(0, 90).map(product => {
+            {products.slice(0, 60).map(product => {
                 if (product['Category'].includes('Clothing')) {
                     return (
                         <li style={{ listStyleType: 'none' }}>

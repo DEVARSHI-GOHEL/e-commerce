@@ -6,6 +6,7 @@ import { Dashboard } from "./components/Dashboard";
 import { PrivateRoute } from "./routes/PrivateRoute";
 import { Cart } from "./components/Cart";
 import { Payment } from "./components/Payment";
+import { ExitScreen } from "./components/ExitScreen";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
             <Route path='/login' element={<LogIn />} />
             <Route path='/cart' element={<Cart />} />
             <Route path='/payment' element={<Payment />} />
+            <Route path='/exit' element={<ExitScreen />} />
           </Routes>
         </BrowserRouter>
       </AuthProvider>

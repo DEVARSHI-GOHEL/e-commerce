@@ -9,6 +9,7 @@ import { AllProductsCategory } from './AllProductsCategory'
 import { useDispatch } from 'react-redux'
 import { setProducts } from '../redux/action-creator/ActionCreators'
 import { useSelector } from 'react-redux'
+import { MDBSpinner } from 'mdb-react-ui-kit'
 
 export const Dashboard = () => {
 
@@ -25,7 +26,7 @@ export const Dashboard = () => {
         }
     }
 
-    const productsCollectionRef = collection(db, 'products')
+    const productsCollectionRef = collection(db, 'Products')
 
     useEffect(() => {
         const getProducts = async () => {
@@ -37,11 +38,23 @@ export const Dashboard = () => {
 
     return (
         <>
+
             <div className="bg bg-light">
-                <NavBar onLogout={handleSubmit}></NavBar>
-                <Carousel></Carousel>
-                {products.length > 1 && < AllProductsCategory />}
+                <NavBar onLogout={handleSubmit} isCart={false}></NavBar>
+                {
+                    products.length === 0
+                        ? <div className="d-flex justify-content-center align-items-center my-3">
+                            <MDBSpinner grow className='mx-2' color='danger' size='sm'>
+                            </MDBSpinner>
+                            <span className='text-danger'>Loading...</span>
+                        </div>
+                        : <div>
+                            <Carousel />
+                            <AllProductsCategory />
+                        </div>
+                }
             </div>
+
         </>
     )
 }
