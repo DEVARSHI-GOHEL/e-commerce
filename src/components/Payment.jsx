@@ -1,4 +1,4 @@
-import { MDBCard, MDBCardBody, MDBCardTitle, MDBContainer, MDBInputGroup, MDBInputGroupText, MDBInputGroupElement, MDBInput, MDBBtn, MDBRow, MDBCol } from 'mdb-react-ui-kit'
+import { MDBCard, MDBCardBody, MDBCardTitle, MDBContainer, MDBInput, MDBBtn, MDBRow, MDBCol } from 'mdb-react-ui-kit'
 import React, { useState } from 'react'
 import { TotalPrice } from './TotalPrice'
 import { useSelector } from 'react-redux'
@@ -6,7 +6,7 @@ import { OrderSummery } from './OrderSummery'
 import { useAuth } from '../context/AuthContext'
 import { useNavigate } from 'react-router-dom'
 import { db } from '../firebase'
-import { collection, addDoc } from "firebase/firestore";
+import { collection, addDoc, getDocs } from "firebase/firestore";
 import { useDispatch } from 'react-redux'
 import { NavBar } from './NavBar'
 import { emptyCart } from '../redux/action-creator/ActionCreators'
@@ -37,7 +37,7 @@ export const Payment = () => {
       email: email,
       orders: carts
     }
-
+    
     createUser(user)
 
     setAddress('')
