@@ -24,14 +24,16 @@ export const Cart = () => {
   return (
     <>
       <NavBar isCart={true} onLogout={handleSubmit} />
-      <div className="d-flex justify-content-center my-3 text-primary">
-        <h4>Cart</h4>
+      <div className="w-100">
+        <div className="d-flex justify-content-center my-3 text-primary">
+          <h4>Cart</h4>
+        </div>
+        {carts.length === 0 && <Alert variant='danger'>No items in cart</Alert>}
+        {carts.map(cart => {
+          return (<CartItem cart={cart} />)
+        })}
+        <TotalPrice isEmpty={carts.length === 0 ? true : false} />
       </div>
-      {carts.length === 0 && <Alert variant='danger'>No items in cart</Alert>}
-      {carts.map(cart => {
-        return (<CartItem cart={cart} />)
-      })}
-      <TotalPrice isEmpty={carts.length === 0 ? true : false} />
     </>
   )
 }

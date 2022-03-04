@@ -34,7 +34,7 @@ export const productReducer = (state = initState, { type, payload }) => {
         case ActionTypes.ADJUST_ITEM_QTY:
             return {
                 ...state,
-                cart: state.cart.map((item) =>
+                cart: state.cart.map    ((item) =>
                     item.id === payload.id
                         ? { ...item, qty: payload.qty }
                         : item

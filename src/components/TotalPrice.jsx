@@ -25,7 +25,7 @@ export const TotalPrice = ({ isEmpty, isPayment }) => {
     }, [carts, totalPrice, totalQuantity, setTotalPrice, setTotalQuantity])
 
     function dynamicClass() {
-        let classList = "container-fluid d-flex justify-content-end "
+        let classList = "d-flex justify-content-end m-2 w-90"
         if (isEmpty) {
             classList = classList + "invisible"
             return classList
