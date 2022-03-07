@@ -29,16 +29,11 @@ export const AuthProvider = ({ children }) => {
         return auth.signOut()
     }
 
-    function anonSignIn() {
-        return auth.signInAnonymously()
-    }
-
     const value = {
         currentUser,
         signup,
         login,
-        signout,
-        anonSignIn
+        signout
     }
 
     useEffect(() => {

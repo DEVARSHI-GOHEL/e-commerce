@@ -3,6 +3,8 @@ import React, { useState } from 'react'
 import { Alert } from 'react-bootstrap'
 import { useAuth } from '../context/AuthContext'
 import { Link, useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
+import { emptyCart } from '../redux/action-creator/ActionCreators'
 
 export const LogIn = () => {
 
@@ -11,7 +13,9 @@ export const LogIn = () => {
     const [password, setPassword] = useState("")
     const [error, setError] = useState()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
 
+    dispatch(emptyCart())
     async function handleSubmit(e) {
         e.preventDefault()
 

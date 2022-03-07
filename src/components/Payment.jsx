@@ -23,13 +23,11 @@ export const Payment = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
   const [users, setUsers] = useState()
-  const [userOrders, setUserOrders] = useState()
 
   useEffect(() => {
     const getData = async () => {
       const data = await getDocs(userCollectionRef)
-      setUsers(data.docs.map(doc => ({ ...doc.data(), id: doc.id })))
-
+      setUsers(data.docs.map(doc => ({...doc.data(), id: doc.id})))
     }
     getData()
   }, [])

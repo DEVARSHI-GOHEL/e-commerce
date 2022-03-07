@@ -37,7 +37,7 @@ export const CartItem = ({ cart }) => {
                                 <div >
                                     Quantity: <span className='text-secondary'>{cart.qty}</span>
                                 </div>
-                                <div >
+                                <div className='py-2'>
                                     Add more?
                                     <span>
                                         <MDBInput

@@ -6,23 +6,13 @@ import { Link, useNavigate } from 'react-router-dom'
 
 export const SignUp = () => {
 
-    const { signup, anonSignIn } = useAuth()
+    const { signup } = useAuth()
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [passwordConf, setPasswordConf] = useState("")
     const [error, setError] = useState()
     const navigate = useNavigate()
-
-    async function signInAnon() {
-        try {
-            setError('')
-            await anonSignIn()
-            navigate('/')
-        } catch {
-            setError('Failed to sign in anonymously')
-        }
-    }
-
+    
     async function handleSubmit(e) {
         e.preventDefault()
 
@@ -75,12 +65,6 @@ export const SignUp = () => {
                                 </MDBCardBody>
                             </div>
                         </form>
-                        <div className="text-center">
-                            <MDBBtn size='sm' type='btn' style={{ width: '10rem' }} color='warning'
-                                onClick={signInAnon}>
-                                Sign In Anonymously
-                            </MDBBtn>
-                        </div>
                     </MDBCard>
                     <p className='text-center mt-3'>Already have account? <Link to='/login'>Log In</Link></p>
                 </div>
