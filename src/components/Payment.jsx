@@ -34,6 +34,7 @@ export const Payment = () => {
 
   const updateUser = async (user) => {
     const userDoc = doc(db, 'Users', user.id)
+    console.log(userDoc)
     const newUserData = {
       displayName: name,
       contact: contact,
@@ -57,6 +58,7 @@ export const Payment = () => {
 
     users.map(user => {
       if (user.email === email) {
+        console.log(user)
         updateUser(user)
       }
     })
@@ -80,7 +82,7 @@ export const Payment = () => {
                       onChange={(e) => setName(e.target.value)}
                       className='m-2' label='Full Name' type='text' style={{ width: '30vw' }} required />
 
-                    <MDBInput className='m-2' label='Email' placeholder={email} type='email' style={{ width: '30vw' }} />
+                    <MDBInput className='m-2' label='Email' placeholder={email} type='email' style={{ width: '30vw' }} readonly/>
 
                     <MDBInput
                       value={contact}
