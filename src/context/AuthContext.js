@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
     function signup(email, password) {
         return (auth.createUserWithEmailAndPassword(email, password)
             .then(() => {
-                return addDoc(userCollectionRef, { email, orders: [] })
+                return addDoc(userCollectionRef, { email })
             }))
     }
 
